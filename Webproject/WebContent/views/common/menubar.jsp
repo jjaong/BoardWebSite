@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.jw.member.model.vo.Member" %>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +47,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+	<script>
+	
+	var msg = "<%= alertMsg %>";
+	
+	if(msg != "null"){
+		alert(msg);
+		
+		<% session.removeAttribute("alertMsg"); %>
+	}
+	
+	</script>
+
 	<h1 style=" text-align: center;"> jawon's Page </h1>
 
     <div class="login-area">
