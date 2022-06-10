@@ -18,5 +18,21 @@ public class MemberService {
 		
 		return m;
 	}
+	
+	public int insertMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().insertMember(conn, m);
+		
+		if(result>0) { //성공
+			JDBCTemplate.commit(conn);
+		} else { //실패
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 		
 }
