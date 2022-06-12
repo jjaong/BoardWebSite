@@ -2,9 +2,9 @@ package com.jw.member.model.service;
 
 import java.sql.Connection;
 
+import com.jw.common.JDBCTemplate;
 import com.jw.member.model.dao.MemberDao;
 import com.jw.member.model.vo.Member;
-import com.jw.common.JDBCTemplate;
 
 public class MemberService {
 	
@@ -75,4 +75,18 @@ public Member updatePwdMember(String userId, String userPwd, String updatePwd) {
 		
 		return updateMem;
 	}
+
+	public int deleteMember(String userId, String userPwd) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, userId, userPwd);
+		
+		if(result>0){//성공
+			JDBCTemplate.commit(conn);
+		
+		}else {//실패
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+}
 }
