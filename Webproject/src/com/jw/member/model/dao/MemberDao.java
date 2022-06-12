@@ -159,7 +159,34 @@ public class MemberDao{
 		}
 		return m;
 	}
+
+	public int updatePwdMember(Connection conn, String userId, String userPwd, String updatePwd) {
 	
+		int result =0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwdMember");
+		
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,updatePwd);
+			pstmt.setString(2,userPwd);
+			pstmt.setString(3,userId);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 }
