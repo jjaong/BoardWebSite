@@ -99,7 +99,10 @@ public class MemberDao{
 		}
 		return result;
 	}
-
+	
+	/**
+	 * 회원 정보 수정
+	 */
 	public int updateMember(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -124,7 +127,10 @@ public class MemberDao{
 		
 		return result;
 	}
-
+	
+	/**
+	 * 회원 선택
+	 */
 	public Member selectMember(Connection conn, String userId) {
 		Member m = null;
 		PreparedStatement pstmt = null;
@@ -159,7 +165,10 @@ public class MemberDao{
 		}
 		return m;
 	}
-
+	
+	/**
+	 * 비밀번호 수정
+	 */
 	public int updatePwdMember(Connection conn, String userId, String userPwd, String updatePwd) {
 	
 		int result =0;
@@ -187,7 +196,10 @@ public class MemberDao{
 		return result;
 		
 	}
-
+	
+	/**
+	 * 회원 삭제
+	 */
 	public int deleteMember(Connection conn, String userId, String userPwd) {
 		int result =0;
 		

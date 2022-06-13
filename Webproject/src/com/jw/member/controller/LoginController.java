@@ -33,11 +33,15 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8"); //POST방식이므로 인코딩 설정
 		
+		//인코딩 설정 (POST방식)
+		request.setCharacterEncoding("UTF-8"); 
+		
+		//input태그의 name속성을 통해 전달값(키값)을 꺼내서 변수에 기록
 		String userId= request.getParameter("userId");
 		String userPwd= request.getParameter("userPwd");
 		
+		//요청 처리하는 서비스 클래스의 메소드 호출
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 	
 		if(loginUser == null) { //로그인 실패

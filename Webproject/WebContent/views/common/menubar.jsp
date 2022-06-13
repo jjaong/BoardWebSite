@@ -39,8 +39,11 @@
     .menu a:hover{
         background-color: rgb(207, 185, 228);
     }
+    
+    
 
 </style>
+<!-- 부트스트랩 사용 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -62,7 +65,9 @@
 	<h1 style=" text-align: center;"> jawon's Page </h1>
 
     <div class="login-area">
-        <form action="login-form" method="post" action="<%=contextPath%>/login.me">
+    
+    	<!-- 로그인 전에 보여지는 로그인 form -->
+        <form id="login-form" method="post" action="<%=contextPath%>/login.me">
             <table>
                 <tr>
                     <th>아이디</th>
@@ -74,8 +79,8 @@
                 </tr>
                 <tr>
                     <th colspan="2">
-                        <button type="submit">로그인</button>
-                        <button type="button" onclick="enrollPage();">회원가입</button>
+                        <button type="submit" class="btn btn-light">로그인</button>
+                        <button type="button" onclick="enrollPage();" class="btn btn-light">회원가입</button>
                     </th>
                 </tr>
             </table>
@@ -90,7 +95,7 @@
     </div>
 
 
-    <br clear="both"><br>
+    <br clear="both"><br><br>
 
     <div class="nav-area" align="center">
         <div class="menu"><a href="<%= contextPath%>">HOME</a></div>
