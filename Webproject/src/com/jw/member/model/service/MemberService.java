@@ -56,7 +56,7 @@ public class MemberService {
 		return updateMem;
 	}
 	
-public Member updatePwdMember(String userId, String userPwd, String updatePwd) {
+	public Member updatePwdMember(String userId, String userPwd, String updatePwd) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
