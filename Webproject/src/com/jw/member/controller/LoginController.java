@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 		
 			view.forward(request, response);
-		}else {
+		}else { //로그인 성공 => index.jsp페이지 
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);

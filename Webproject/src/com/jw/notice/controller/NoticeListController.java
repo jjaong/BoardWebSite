@@ -1,25 +1,28 @@
-package com.jw.member.controller;
+package com.jw.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.jw.notice.model.service.NoticeService;
+import com.jw.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class MyPageController
+ * Servlet implementation class NoticeListController
  */
-@WebServlet("/myPage.me")
-public class MyPageController extends HttpServlet {
+@WebServlet("/list.no")
+public class NoticeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public NoticeListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +31,13 @@ public class MyPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser")==null) {
-			session.setAttribute("alertMsg","로그인 후 이용가능한 서비스입니다.");
-			
-			response.sendRedirect(request.getContextPath());
-		}else {			
-			request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
-		}
+		ArrayList<Notice> list = new NoticeService().selectNoticeList();
+		
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("/views/notice/noticeListView.jsp").forward(request, response);;
+	
 	}
 
 	/**

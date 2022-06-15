@@ -31,38 +31,22 @@ public class MemberDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
-		// 2) request로부터 값 뽑기
 		String userPwd = request.getParameter("userPwd");
 		
-		//현재 로그인한 회원의 정보를 얻는 방법
-		//방법1. input type = "hidden"으로 애초에 요청시 숨겨서 전달해버린다.
-		//방법2. session 영역에 담겨있는 회원객체로부터 뽑아온다.
-		
-		//세션에 담겨있는 기존 로그인된 사용자의 정보를 얻어와보자!
 		HttpSession session = request.getSession();
 		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
 	
-		//3) vo가공
-		
-		//4) service단으로 토스
 		int result = new MemberService().deleteMember(userId, userPwd);
 		
-		//5) 결과에 따른 응답 페이지 지정
 		if(result>0) {//성공 =>  탈퇴가 된 것 => 로그인이 유지 되어야하지 않음 
 			
-			//invalidate() 세션을 만료시킴
-			//alert못씀
-			//removeAttribute()요거 써서 로그아웃 시키자
 			session.removeAttribute("loginUser");
-			
-			//로그아웃 되었으므로 마이페이지가 보이면 안됨
-			//메인페이지로 보내버리자 => localhost:8001/jsp
 			
 			response.sendRedirect(request.getContextPath());
 			
-		}else { //실패=> 탈퇴가 아직 안된것 => 오류페이지로 보낼것이다!
+		}else { //실패=> 탈퇴가 아직 안된것 => 오류페이지
 			request.setAttribute("errorMsg", "회원 탈퇴에 실패했습니다.");
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
