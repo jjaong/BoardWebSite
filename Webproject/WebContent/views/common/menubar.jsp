@@ -78,7 +78,7 @@
                     <td><input type="password" name="userPwd" required></td>
                 </tr>
                 <tr>
-                    <th colspan="2">
+                    <th colspan="2" align="right">
                         <button type="submit" class="btn btn-light">로그인</button>
                         <button type="button" onclick="enrollPage();" class="btn btn-light">회원가입</button>
                     </th>
