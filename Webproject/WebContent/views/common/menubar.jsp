@@ -65,7 +65,8 @@
 	<h1 style=" text-align: center;"> jawon's Page </h1>
 
     <div class="login-area">
-    
+    	
+    <%if(loginUser ==null) {%>
     	<!-- 로그인 전에 보여지는 로그인 form -->
         <form id="login-form" method="post" action="<%=contextPath%>/login.me">
             <table>
@@ -88,10 +89,22 @@
 
         <script>
             function enrollPage(){
+            	
+        
                 location.href= "<%= contextPath %>/enrollForm.me";
             }
 
         </script>
+        <% } else { %>
+			<!-- 로그인 성공 후 화면 -->
+			<div id="user-info">
+				<b><%= loginUser.getUserName() %></b>님 환영합니다.<br><br>
+				<div align="center">
+					<a href="<%= contextPath %>/myPage.me">마이페이지</a>
+					<a href="<%= contextPath %>/logout.me">로그아웃</a>
+				</div>
+			</div>
+		<% } %>
     </div>
 
 

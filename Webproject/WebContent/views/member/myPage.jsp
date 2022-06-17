@@ -28,8 +28,7 @@
 	<%
 		String userId = loginUser.getUserId();
 		String userName = loginUser.getUserName();
-		
-		// 필수입력사항이 아닐경우 -> 값 또는 빈문자열 이 들어있다  배열의 경우엔 선택안할경우 null
+	
 		String phone = (loginUser.getPhone() == null) ? "" : loginUser.getPhone();
 		String email = (loginUser.getEmail() == null) ? "" : loginUser.getEmail();
 		String address = (loginUser.getAddress() == null) ? "" : loginUser.getAddress();
@@ -51,7 +50,6 @@
 					<td>* 아이디</td>
 					<td><input readonly type="text" required maxlength="12" name="userId" value="<%= userId %>"></td>
 					<td></td>
-					<!--Ajax기술을 배울때 구현할 것-->
 				</tr>
 				<tr>
 					<td>* 이름</td>
@@ -91,18 +89,9 @@
 			<script>
          
             var interest = "<%= interest %>";
-            
-            // 모든 체크박스가 배열에 담김
             $('input[type=checkbox]').each(function(){
-               
-               // 순차적으로 접근한 checkbox의 value속성값이 interest에 포함되어있을 경우만 체크하겠다
-               // => checkes속성부여 => attr(속성명, 속성값);
-               
-               // 자바스크립트의 indexOf => 찾고자하는 문자가 없을 경우 -1을 리턴 == 제이쿼리의 search메소드
-               // 제이쿼리에서 value속성값을 리턴해주는 메소드 : val()
-               // 제이쿼리에서 현재 접근한 요서 지칭 : $(this)
-               
-               if(interest.search($(this).val()) != -1){ // 포함되어있을 경우 => checked속성 부여
+           
+               if(interest.search($(this).val()) != -1){
                   $(this).attr("checked", true);
                }
             })
@@ -137,9 +126,7 @@
 				
 				<form action="<%= contextPath %>/updatePwd.me" method="post">
 
-					<!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 확인(재입력) -->
 					
-					<!-- 확실하게 주인은 판별할 수 있는 id값도 같이 넘겨줌 -->
 					<input type="hidden" name="userId" value ="<%= userId %>">
 
 					<table>
