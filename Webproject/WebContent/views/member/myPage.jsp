@@ -91,6 +91,7 @@
             var interest = "<%= interest %>";
             $('input[type=checkbox]').each(function(){
            
+            	//indexOf(javascript) == search(jquery)
                if(interest.search($(this).val()) != -1){
                   $(this).attr("checked", true);
                }

@@ -45,12 +45,15 @@ public class LoginController extends HttpServlet {
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 	
 		if(loginUser == null) { //로그인 실패
+			//request의 attribute영역에 메시지 담기(키, 벨류)
 			request.setAttribute("errorMsg", "로그인에 실패했습니다.");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-		
+			
+			//포워딩
 			view.forward(request, response);
 		}else { //로그인 성공 => index.jsp페이지 
+			//로그인한 정보를 계속 가져다 씀 -> session에 담기
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);

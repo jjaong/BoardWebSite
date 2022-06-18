@@ -65,7 +65,9 @@
 				 INTEREST=?,
 				 MODIFY_DATE = SYSDATE
 			WHERE
-				 USER_ID=? AND STATUS ='Y'
+				 USER_ID=? 
+			AND 
+				STATUS ='Y'
 	</entry>
 	
 	<entry key="selectMember">

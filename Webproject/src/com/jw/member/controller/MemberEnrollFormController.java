@@ -32,6 +32,8 @@ public class MemberEnrollFormController extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("views/member/memberEnrollForm.jsp");
 		
 		view.forward(request, response);
+		
+		//request.getRequestDispatcher("views/member/memberEnrollForm.jsp").forward(request,response);
 	}
 
 	/**
