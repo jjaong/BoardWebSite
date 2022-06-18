@@ -146,7 +146,7 @@
 
 					<br>
 
-					<button type="submit" class="btn-btn-sm btn-secondary" onclick="return validatePwd();">비밀번호 변경</button>
+					<button type="submit" class="btn-btn-sm btn-secondary" onclick="return validatePwd();" align="center">비밀번호 변경</button>
 				</form>
 
 				<script>

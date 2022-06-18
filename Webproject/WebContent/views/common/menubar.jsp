@@ -14,8 +14,14 @@
 <meta charset="UTF-8">
 <title>메뉴바</title>
 <style>
-    #login-form{float:right;}
+    #login-form, #user-info{float:right;}
 
+	#user-info a{
+	text-decoration : none;
+	color:black;
+	font-size:12px;
+	}
+	
     .nav-area{
         background-color: rgb(22, 70, 111);
     }
@@ -39,7 +45,18 @@
     .menu a:hover{
         background-color: rgb(207, 185, 228);
     }
+
+    #pageName{
+        text-align: center;
+       
+    }
     
+    #apageName{
+        text-decoration: none;
+        font-size: 50px;
+        font-weight: bold;
+        color: black;
+    }
     
 
 </style>
@@ -61,8 +78,10 @@
 	}
 	
 	</script>
-
-	<h1 style=" text-align: center;"> jawon's Page </h1>
+	<br><br>
+	<div id="pageName">
+	<a href="<%= contextPath%>" id="apageName">JAWON'S PAGE</a>
+	</div>
 
     <div class="login-area">
     	
@@ -99,7 +118,7 @@
 			<!-- 로그인 성공 후 화면 -->
 			<div id="user-info">
 				<b><%= loginUser.getUserName() %></b>님 환영합니다.<br><br>
-				<div align="center">
+				<div align="right">
 					<a href="<%= contextPath %>/myPage.me">마이페이지</a>
 					<a href="<%= contextPath %>/logout.me">로그아웃</a>
 				</div>
