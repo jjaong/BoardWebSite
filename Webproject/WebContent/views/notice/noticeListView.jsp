@@ -80,6 +80,20 @@
         </table>
  		<br><br><br>
     </div>
-	
+    
+    <script>
+     $(function(){
+         $(".list-area>tbody>tr").click(function(){
+        	 
+        	 var nno = $(this).children().eq(0).text();
+        	 
+        	 //GET방식
+        	 location.href="<%= contextPath %>/detail.no?nno=" + nno;
+
+ 
+    	 })
+     
+     })
+	</script>
 </body>
 </html>
