@@ -7,7 +7,7 @@
 <title>회원가입</title>
 <style>
 	.outer{
-		background-color : rgb(162, 193, 255);
+		background-color : rgb(224, 234, 255);
 		color: white;
 		width: 1000px;
 		margin: auto;

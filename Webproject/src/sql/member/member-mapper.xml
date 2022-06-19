@@ -76,7 +76,7 @@
 				USER_ID,
 				USER_PWD,
 				USER_NAME,
-				PHONEM
+				PHONE,
 				EMAIL,
 				ADDRESS,
 				INTEREST,

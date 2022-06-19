@@ -31,7 +31,7 @@ public class NoticeDao {
 
 	public ArrayList<Notice> selectNoticeList(Connection conn) {
 		
-		ArrayList<Notice> list = new ArrayList();
+		ArrayList<Notice> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		
@@ -60,6 +60,31 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+
+	public int insertNotice(Connection conn, Notice n) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setInt(3, Integer.parseInt(n.getNoticeWriter()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
