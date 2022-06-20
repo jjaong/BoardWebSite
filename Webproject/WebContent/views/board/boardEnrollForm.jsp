@@ -38,11 +38,8 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 	<br>
 	<h2 align="center">일반게시글 작성하기</h2>
 	<br>
-	<!-- 파일 첨부하는 요청을 할 때는 반드시 enctype="multipart/form-data"를 추가해야한다. -->
 		<form id="enroll-form" enctype="multipart/form-data" action="<%= contextPath %>/insert.bo" method="post">
 
-			<!-- 제목, 내용, 카테고리, 첨부파일 입력받기 + userNO-->
-			<!-- 작성자의 회원 번호를 hidden으로 같이 넘겨야 board테이블에 INSERT가능 -->
 			<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">			
 			
 			<table align="center">
