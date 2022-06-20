@@ -1,6 +1,7 @@
 package com.jw.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jw.board.model.service.BoardService;
+import com.jw.board.model.vo.Board;
+import com.jw.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class BoardListController
@@ -42,10 +45,25 @@ public class BoardListController extends HttpServlet {
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
-		//마지막 페이지 
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
 		
+		startPage = (currentPage - 1) / pageLimit * pageLimit +1;
 		
+		endPage = startPage + pageLimit -1;
+		
+		if(endPage>maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi= new PageInfo(listCount,currentPage, pageLimit, boardLimit,
+									maxPage, startPage, endPage);
+		
+		ArrayList<Board> list = new BoardService().selectList(pi);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("pi", pi);
+		
+		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request,response);
 		
 		
 	}

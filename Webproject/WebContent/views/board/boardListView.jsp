@@ -1,16 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList, com.jw.board.model.vo.Board, com.jw.common.model.vo.PageInfo"  %>
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+	//페이징바 만들때 필요한 변수 미리 셋팅
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일반게시판</title>
+<title>일반 게시판</title>
 <style>
-    .outer{
-        background-color: rgb(126, 138, 192);
+	.outer{
+        background-color:rgb(126, 138, 192);
         color:white;
         width: 1000px;
-        height: 600px;
+		height: 600px;
         margin: auto;
         margin-top: 30px;
     }
@@ -21,19 +33,28 @@
     }
     .list-area>tbody>tr:hover{
         cursor : pointer;
-        background-color: rgb(76, 89, 124);
+        background-color: rgb(13,66,60);
     }
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
+	<%@include file="../common/menubar.jsp" %>
 	
 	<div class="outer">
+	
+		<br>
+		<h2 align="center">일반게시판</h2>
+		<br>
 
-        <br>
-        <h2 align="center">일반게시판</h2>
-        <br>
-        <table class="list-area" align="center">
+		<div align="right" style="width:850px">
+			<!-- 로그인한 회원만 보여지는 버튼 : loginUser가 null인지 아닌지 판단 -->
+			<% if(loginUser != null) { %>
+				<a href="<%= contextPath %>/enrollForm.bo" class="btn btn-info btn-sm">글작성</a>
+				<br><br>
+			<% } %>
+		</div>
+
+		<table class="list-area" align="center">
 			<thead>
 				<tr>
 					<th width="70">글번호</th>
@@ -68,17 +89,37 @@
 			</tbody>
 		</table>
 
-        <br><br>
+		<script>
+			$(function(){
+				$(".list-area>tbody>tr").click(function(){
+					var bno = $(this).children().eq(0).text();
+	
+					location.href="<%= contextPath %>/detail.bo?bno=" + bno;
+				})
+			})
+		</script>
+	
+		<br><br>
 
-        <div align="center">
-            <button> &lt;</button>
-
-            <button> &gt;</button>
-        </div>
-
-
+		<div align="center" class="paging-area">
+			
+			<% if(currentPage != 1) { %> <!-- 페이징바에서 <를 담당 -->
+				<button class="btn btn-sm btn-info" onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage - 1 %>'"> &lt; </button>
+			<% } %>
+			
+			<% for(int i = startPage; i<=endPage; i++) { %>
+				<% if(i != currentPage) { %>	
+				<button class="btn btn-sm btn-info" onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= i %>'"><%= i %></button>
+				<% } else { %>
+					<button class="btn btn-sm btn-info" disabled><%= i %></button>
+				<% } %>
+			<% } %>
+			
+			
+			<% if(currentPage != maxPage) { %>
+				<button class="btn btn-sm btn-info" onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage + 1 %>'"> &gt; </button>
+			<% } %>
+		</div>
 	</div>
-
-    
 </body>
 </html>

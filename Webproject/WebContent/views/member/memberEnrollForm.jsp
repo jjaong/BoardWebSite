@@ -87,8 +87,26 @@
 			</div>
 
 		</form>
+		
 	
 	</div>
 
+	<script>
+		function idCheck(){
+			var $userId = $("#enroll-form input[name=userId]");
+			
+			$.ajax({
+				url : "idCheck.me",
+				data : {checkId : $userId.val()},
+				success : function(){
+					
+				},
+				error : function(){
+					console.log("아이디 중복체크용 비동기요청 실패");
+				}
+			});
+		}
+	
+	</script>
 </body>
 </html>
