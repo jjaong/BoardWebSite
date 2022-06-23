@@ -88,6 +88,11 @@ public class BoardService {
 		close(conn);
 		return at;
 	}
+
+	public int updateBoard(Board b, Attachment at) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }

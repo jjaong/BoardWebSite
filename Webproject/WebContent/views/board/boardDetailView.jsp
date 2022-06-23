@@ -74,6 +74,15 @@
 	
 	</table>
 	
+	<br>
+	
+	<div align="center">
+		<a href ="<%= contextPath %>/list.bo?cpage=1" class = "btn btn-sm btn-secondary">목록가기</a>
+		<%if(loginUser != null && b.getBoardWriter().equals(loginUser.getUserId())) {%>
+			<a href="<%= contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class = "btn btn-sm btn-warning">수정하기</a>
+			<a href="<%= contextPath %>/delete.bo" class="btn btn-sm btn-danger">삭제하기</a>
+		<%} %>
+	</div>
 	
 	</div>
 
