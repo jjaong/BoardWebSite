@@ -69,7 +69,7 @@ public class BoardUpdateController extends HttpServlet {
 				
 					at.setFileNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
 					
-					new File(savePath+ multiRequest.getParameter("originFileName")).delete();
+					new File(savePath+multiRequest.getParameter("originFileName")).delete();
 				}else {
 					
 					at.setRefBno(boardNo);

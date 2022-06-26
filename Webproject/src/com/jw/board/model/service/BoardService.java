@@ -90,9 +90,50 @@ public class BoardService {
 	}
 
 	public int updateBoard(Board b, Attachment at) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		Connection conn = getConnection();
+		
+		int result1 = new BoardDao().updateBoard(conn, b);
+		
+		int result2 = 1;
+		
+		if(at != null) {
+			
+			if(at.getFileNo() != 0) {
+				result2 = new BoardDao().updateAttachment(conn, at);
+			} else {
+				result2 = new BoardDao().insertNewAttachment(conn, at);
+			}
+			
+		} 
+		
+		if(result1 * result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return (result1 * result2);
 	}
+		
+	public int deleteBoard(int boardNo) {
+			
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(conn, boardNo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	
 	
 
 }
